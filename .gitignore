@@ -1,0 +1,14 @@
+/vendor/ 
+.env 
+.storage/ 
+/bootstrap/cache/ 
+storage/logs/ 
+*.log 
+.DS_Store 
+Thumbs.db 
+.idea/ 
+.vscode/ 
+desktop.ini 
+*.backup 
+*.tmp 
+.phpunit.result.cache 
