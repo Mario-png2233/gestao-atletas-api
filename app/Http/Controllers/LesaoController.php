@@ -23,7 +23,7 @@ class LesaoController extends Controller
             'gravidade' => 'required|in:LEVE,MODERADA,GRAVE',
             'descricao' => 'required',
             'data_lesao' => 'required|date',
-            'data_recuperacao_estimada' => 'required|date' // Nome correto da coluna
+            'data_recuperacao_estimada' => 'required|date'
         ]);
 
         // RN-021: Verificar se previsão de retorno é futura
@@ -36,28 +36,28 @@ class LesaoController extends Controller
         try {
             $lesao = Lesao::create([
                 'atleta_id' => $atletaId,
+                'usuario_id' => 1, // ← ADICIONADO para compatibilidade com a tabela
                 'tipo_lesao' => $request->tipo_lesao,
                 'gravidade' => $request->gravidade,
                 'descricao' => $request->descricao,
+                'tratamento_prescrito' => $request->tratamento_prescrito ?? '', // ← ADICIONADO
                 'data_lesao' => $request->data_lesao,
-                'data_recuperacao_estimada' => $request->data_recuperacao_estimada, // Nome correto
+                'previsao_retorno' => $request->previsao_retorno ?? $request->data_recuperacao_estimada, // ← ADICIONADO
+                'data_recuperacao_estimada' => $request->data_recuperacao_estimada,
                 'status' => 'ATIVA'
             ]);
 
             // Atualizar status do atleta para lesionado
             $atleta->update(['status' => 'LESIONADO']);
 
-            // Criar notificação (corrigido o typo)
+            // Criar notificação (SEM o campo problemático)
             Notificacao::create([
-                'usuario_id' => 1, // Alterado para 1 (usuário logado)
+                'usuario_id' => 1,
                 'titulo' => 'Nova Lesão Registrada',
-                'mensagem' => "Atleta {$atleta->nome} sofreu uma lesão: {$request->tipo_lesao}",
+                'mensagem' => "Atleta {$atleta->nome} sofreu uma lesão: {$request->tipo_lesao} - Gravidade: {$request->gravidade}",
                 'tipo' => 'LESAO',
-                'dados_adicionais' => json_encode([ // CORRIGIDO: 'adicinais' → 'adicionais'
-                    'atleta_id' => $atleta->id,
-                    'lesao_id' => $lesao->id,
-                    'gravidade' => $request->gravidade
-                ])
+                'lida' => false
+                // REMOVIDO: dados_adicionais para evitar erro
             ]);
 
             return response()->json(['data' => $lesao], 201);
