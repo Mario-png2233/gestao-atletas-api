@@ -35,33 +35,33 @@ try {
         $stmt = $pdo->prepare("INSERT IGNORE INTO usuarios (email, senha, perfil, tentativas_login, created_at, updated_at) VALUES (?, ?, ?, 0, NOW(), NOW())");
         $stmt->execute([$u['email'], $u['senha'], $u['perfil']]);
     }
-    $results['steps'][] = 'Usuários criados';
+    $results['steps'][] = 'Usuarios criados';
     
     // 2. Criar atletas (11 jogadores - time completo)
     $atletas = [
-        ['nome' => 'Carlos Silva', 'data_nascimento' => '1995-03-15', 'posicao' => 'Goleiro', 'altura' => 1.88, 'peso' => 82.0],
-        ['nome' => 'Rafael Santos', 'data_nascimento' => '1998-07-22', 'posicao' => 'Lateral Direito', 'altura' => 1.76, 'peso' => 72.0],
-        ['nome' => 'André Oliveira', 'data_nascimento' => '1996-01-10', 'posicao' => 'Zagueiro', 'altura' => 1.85, 'peso' => 80.0],
-        ['nome' => 'Lucas Mendes', 'data_nascimento' => '1997-05-28', 'posicao' => 'Zagueiro', 'altura' => 1.87, 'peso' => 82.0],
-        ['nome' => 'Bruno Costa', 'data_nascimento' => '1999-11-03', 'posicao' => 'Lateral Esquerdo', 'altura' => 1.74, 'peso' => 70.0],
-        ['nome' => 'Pedro Almeida', 'data_nascimento' => '1998-09-14', 'posicao' => 'Volante', 'altura' => 1.80, 'peso' => 76.0],
-        ['nome' => 'Thiago Ferreira', 'data_nascimento' => '1997-12-20', 'posicao' => 'Meia', 'altura' => 1.75, 'peso' => 71.0],
-        ['nome' => 'Gabriel Souza', 'data_nascimento' => '2000-04-08', 'posicao' => 'Meia', 'altura' => 1.72, 'peso' => 68.0],
-        ['nome' => 'Matheus Lima', 'data_nascimento' => '1999-06-17', 'posicao' => 'Ponta Direita', 'altura' => 1.73, 'peso' => 69.0],
-        ['nome' => 'Felipe Rodrigues', 'data_nascimento' => '1998-02-25', 'posicao' => 'Ponta Esquerda', 'altura' => 1.71, 'peso' => 67.0],
-        ['nome' => 'Diego Martins', 'data_nascimento' => '1996-08-30', 'posicao' => 'Centroavante', 'altura' => 1.82, 'peso' => 78.0],
+        ['nome' => 'Carlos Silva', 'data_nascimento' => '1995-03-15', 'posicao' => 'Goleiro', 'altura' => 1.88, 'peso' => 82.0, 'telefone_contato' => '11999990001'],
+        ['nome' => 'Rafael Santos', 'data_nascimento' => '1998-07-22', 'posicao' => 'Lateral Direito', 'altura' => 1.76, 'peso' => 72.0, 'telefone_contato' => '11999990002'],
+        ['nome' => 'Andre Oliveira', 'data_nascimento' => '1996-01-10', 'posicao' => 'Zagueiro', 'altura' => 1.85, 'peso' => 80.0, 'telefone_contato' => '11999990003'],
+        ['nome' => 'Lucas Mendes', 'data_nascimento' => '1997-05-28', 'posicao' => 'Zagueiro', 'altura' => 1.87, 'peso' => 82.0, 'telefone_contato' => '11999990004'],
+        ['nome' => 'Bruno Costa', 'data_nascimento' => '1999-11-03', 'posicao' => 'Lateral Esquerdo', 'altura' => 1.74, 'peso' => 70.0, 'telefone_contato' => '11999990005'],
+        ['nome' => 'Pedro Almeida', 'data_nascimento' => '1998-09-14', 'posicao' => 'Volante', 'altura' => 1.80, 'peso' => 76.0, 'telefone_contato' => '11999990006'],
+        ['nome' => 'Thiago Ferreira', 'data_nascimento' => '1997-12-20', 'posicao' => 'Meia', 'altura' => 1.75, 'peso' => 71.0, 'telefone_contato' => '11999990007'],
+        ['nome' => 'Gabriel Souza', 'data_nascimento' => '2000-04-08', 'posicao' => 'Meia', 'altura' => 1.72, 'peso' => 68.0, 'telefone_contato' => '11999990008'],
+        ['nome' => 'Matheus Lima', 'data_nascimento' => '1999-06-17', 'posicao' => 'Ponta Direita', 'altura' => 1.73, 'peso' => 69.0, 'telefone_contato' => '11999990009'],
+        ['nome' => 'Felipe Rodrigues', 'data_nascimento' => '1998-02-25', 'posicao' => 'Ponta Esquerda', 'altura' => 1.71, 'peso' => 67.0, 'telefone_contato' => '11999990010'],
+        ['nome' => 'Diego Martins', 'data_nascimento' => '1996-08-30', 'posicao' => 'Centroavante', 'altura' => 1.82, 'peso' => 78.0, 'telefone_contato' => '11999990011'],
     ];
     
     foreach ($atletas as $a) {
-        $stmt = $pdo->prepare("INSERT IGNORE INTO atletas (nome, data_nascimento, posicao, altura, peso, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, 'ATIVO', NOW(), NOW())");
-        $stmt->execute([$a['nome'], $a['data_nascimento'], $a['posicao'], $a['altura'], $a['peso']]);
+        $stmt = $pdo->prepare("INSERT IGNORE INTO atletas (nome, data_nascimento, posicao, altura, peso, status, telefone_contato, created_at, updated_at) VALUES (?, ?, ?, ?, ?, 'ATIVO', ?, NOW(), NOW())");
+        $stmt->execute([$a['nome'], $a['data_nascimento'], $a['posicao'], $a['altura'], $a['peso'], $a['telefone_contato']]);
     }
     $results['steps'][] = '11 Atletas criados';
     
     // 3. Criar partidas
     $partidas = [
-        ['adversario' => 'Flamengo', 'data_hora' => '2025-12-10 16:00:00', 'local' => 'Maracanã', 'tipo' => 'CAMPEONATO', 'competicao' => 'Brasileirão'],
-        ['adversario' => 'Palmeiras', 'data_hora' => '2025-12-15 19:00:00', 'local' => 'Allianz Parque', 'tipo' => 'CAMPEONATO', 'competicao' => 'Brasileirão'],
+        ['adversario' => 'Flamengo', 'data_hora' => '2025-12-10 16:00:00', 'local' => 'Maracana', 'tipo' => 'CAMPEONATO', 'competicao' => 'Brasileirao'],
+        ['adversario' => 'Palmeiras', 'data_hora' => '2025-12-15 19:00:00', 'local' => 'Allianz Parque', 'tipo' => 'CAMPEONATO', 'competicao' => 'Brasileirao'],
         ['adversario' => 'Santos', 'data_hora' => '2025-12-20 21:00:00', 'local' => 'Vila Belmiro', 'tipo' => 'AMISTOSO', 'competicao' => 'Amistoso'],
     ];
     
@@ -73,9 +73,9 @@ try {
     
     // 4. Criar treinos
     $treinos = [
-        ['data_hora' => '2025-12-05 09:00:00', 'tipo_treino' => 'TATICO', 'local' => 'CT do Clube', 'descricao' => 'Treino tático com foco em jogadas ensaiadas', 'duracao_minutos' => 90],
-        ['data_hora' => '2025-12-06 09:00:00', 'tipo_treino' => 'FISICO', 'local' => 'CT do Clube', 'descricao' => 'Treino físico de resistência', 'duracao_minutos' => 120],
-        ['data_hora' => '2025-12-07 09:00:00', 'tipo_treino' => 'TECNICO', 'local' => 'CT do Clube', 'descricao' => 'Treino técnico de finalização', 'duracao_minutos' => 90],
+        ['data_hora' => '2025-12-05 09:00:00', 'tipo_treino' => 'TATICO', 'local' => 'CT do Clube', 'descricao' => 'Treino tatico com foco em jogadas ensaiadas', 'duracao_minutos' => 90],
+        ['data_hora' => '2025-12-06 09:00:00', 'tipo_treino' => 'FISICO', 'local' => 'CT do Clube', 'descricao' => 'Treino fisico de resistencia', 'duracao_minutos' => 120],
+        ['data_hora' => '2025-12-07 09:00:00', 'tipo_treino' => 'TECNICO', 'local' => 'CT do Clube', 'descricao' => 'Treino tecnico de finalizacao', 'duracao_minutos' => 90],
     ];
     
     foreach ($treinos as $t) {
@@ -86,21 +86,21 @@ try {
     
     // 5. Criar patrocínios
     $patrocinios = [
-        ['empresa' => 'Nike', 'valor_contrato' => 500000.00, 'data_inicio' => '2025-01-01', 'data_fim' => '2025-12-31', 'tipo' => 'MATERIAL_ESPORTIVO', 'status' => 'ATIVO', 'contato' => 'João Silva', 'email' => 'joao@nike.com'],
-        ['empresa' => 'Banco do Brasil', 'valor_contrato' => 300000.00, 'data_inicio' => '2025-01-01', 'data_fim' => '2025-12-31', 'tipo' => 'PRINCIPAL', 'status' => 'ATIVO', 'contato' => 'Maria Santos', 'email' => 'maria@bb.com'],
-        ['empresa' => 'Coca-Cola', 'valor_contrato' => 150000.00, 'data_inicio' => '2025-06-01', 'data_fim' => '2025-12-31', 'tipo' => 'SECUNDARIO', 'status' => 'ATIVO', 'contato' => 'Pedro Lima', 'email' => 'pedro@cocacola.com'],
+        ['empresa' => 'Nike', 'valor_contrato' => 500000.00, 'data_inicio' => '2025-01-01', 'data_fim' => '2025-12-31', 'tipo' => 'MATERIAL_ESPORTIVO', 'status' => 'ATIVO', 'contato' => 'Joao Silva', 'email' => 'joao@nike.com', 'telefone' => '11999001234'],
+        ['empresa' => 'Banco do Brasil', 'valor_contrato' => 300000.00, 'data_inicio' => '2025-01-01', 'data_fim' => '2025-12-31', 'tipo' => 'PRINCIPAL', 'status' => 'ATIVO', 'contato' => 'Maria Santos', 'email' => 'maria@bb.com', 'telefone' => '11999005678'],
+        ['empresa' => 'Coca-Cola', 'valor_contrato' => 150000.00, 'data_inicio' => '2025-06-01', 'data_fim' => '2025-12-31', 'tipo' => 'SECUNDARIO', 'status' => 'ATIVO', 'contato' => 'Pedro Lima', 'email' => 'pedro@cocacola.com', 'telefone' => '11999009012'],
     ];
     
     foreach ($patrocinios as $p) {
-        $stmt = $pdo->prepare("INSERT IGNORE INTO patrocinios (empresa, valor_contrato, data_inicio, data_fim, tipo, status, contato, email, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
-        $stmt->execute([$p['empresa'], $p['valor_contrato'], $p['data_inicio'], $p['data_fim'], $p['tipo'], $p['status'], $p['contato'], $p['email']]);
+        $stmt = $pdo->prepare("INSERT IGNORE INTO patrocinios (empresa, valor_contrato, data_inicio, data_fim, tipo, status, contato, email, telefone, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
+        $stmt->execute([$p['empresa'], $p['valor_contrato'], $p['data_inicio'], $p['data_fim'], $p['tipo'], $p['status'], $p['contato'], $p['email'], $p['telefone']]);
     }
-    $results['steps'][] = 'Patrocínios criados';
+    $results['steps'][] = 'Patrocinios criados';
     
     // 6. Criar despesas
     $despesas = [
-        ['descricao' => 'Salários dos jogadores', 'valor' => 250000.00, 'data' => '2025-12-01', 'categoria' => 'SALARIOS', 'status' => 'PAGO'],
-        ['descricao' => 'Manutenção do CT', 'valor' => 15000.00, 'data' => '2025-12-01', 'categoria' => 'INFRAESTRUTURA', 'status' => 'PAGO'],
+        ['descricao' => 'Salarios dos jogadores', 'valor' => 250000.00, 'data' => '2025-12-01', 'categoria' => 'SALARIOS', 'status' => 'PAGO'],
+        ['descricao' => 'Manutencao do CT', 'valor' => 15000.00, 'data' => '2025-12-01', 'categoria' => 'INFRAESTRUTURA', 'status' => 'PAGO'],
         ['descricao' => 'Equipamentos de treino', 'valor' => 8000.00, 'data' => '2025-12-02', 'categoria' => 'EQUIPAMENTOS', 'status' => 'PENDENTE'],
         ['descricao' => 'Viagem - Jogo contra Flamengo', 'valor' => 25000.00, 'data' => '2025-12-10', 'categoria' => 'VIAGENS', 'status' => 'PENDENTE'],
     ];
@@ -130,27 +130,27 @@ try {
     $tecnicoId = $tecnico ? $tecnico['id'] : 1;
     
     $taticas = [
-        ['nome' => '4-3-3 Ofensivo', 'descricao' => 'Formação ofensiva com três atacantes e meio-campo forte', 'formacao' => '4-3-3', 'instrucoes_ataque' => 'Pressão alta, bolas nas pontas', 'instrucoes_defesa' => 'Marcação por zona'],
-        ['nome' => '4-4-2 Clássico', 'descricao' => 'Formação equilibrada com duas linhas de quatro', 'formacao' => '4-4-2', 'instrucoes_ataque' => 'Contra-ataques rápidos', 'instrucoes_defesa' => 'Bloco baixo compacto'],
-        ['nome' => '3-5-2 Compacto', 'descricao' => 'Formação com três zagueiros e alas', 'formacao' => '3-5-2', 'instrucoes_ataque' => 'Alas como opção ofensiva', 'instrucoes_defesa' => 'Três zagueiros fixos'],
+        ['nome' => '4-3-3 Ofensivo', 'descricao' => 'Formacao ofensiva com tres atacantes e meio-campo forte', 'formacao' => '4-3-3'],
+        ['nome' => '4-4-2 Classico', 'descricao' => 'Formacao equilibrada com duas linhas de quatro', 'formacao' => '4-4-2'],
+        ['nome' => '3-5-2 Compacto', 'descricao' => 'Formacao com tres zagueiros e alas', 'formacao' => '3-5-2'],
     ];
     
     foreach ($taticas as $t) {
-        $stmt = $pdo->prepare("INSERT IGNORE INTO taticas (nome, descricao, formacao, usuario_id, instrucoes_ataque, instrucoes_defesa, ativa, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, 1, NOW(), NOW())");
-        $stmt->execute([$t['nome'], $t['descricao'], $t['formacao'], $tecnicoId, $t['instrucoes_ataque'], $t['instrucoes_defesa']]);
+        $stmt = $pdo->prepare("INSERT IGNORE INTO taticas (nome, descricao, formacao, usuario_id, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW())");
+        $stmt->execute([$t['nome'], $t['descricao'], $t['formacao'], $tecnicoId]);
     }
-    $results['steps'][] = 'Táticas criadas';
+    $results['steps'][] = 'Taticas criadas';
     
     // 9. Criar eventos no calendário
     $eventos = [
-        ['titulo' => 'Jogo vs Flamengo', 'descricao' => 'Campeonato Brasileiro', 'data_inicio' => '2025-12-10 16:00:00', 'data_fim' => '2025-12-10 18:00:00', 'tipo' => 'JOGO', 'local' => 'Maracanã', 'cor' => '#FF5722'],
-        ['titulo' => 'Treino Tático', 'descricao' => 'Preparação para o jogo', 'data_inicio' => '2025-12-09 09:00:00', 'data_fim' => '2025-12-09 11:00:00', 'tipo' => 'TREINO', 'local' => 'CT do Clube', 'cor' => '#4CAF50'],
-        ['titulo' => 'Exames Médicos', 'descricao' => 'Check-up mensal do elenco', 'data_inicio' => '2025-12-08 08:00:00', 'data_fim' => '2025-12-08 12:00:00', 'tipo' => 'EXAME', 'local' => 'Centro Médico', 'cor' => '#2196F3'],
+        ['titulo' => 'Jogo vs Flamengo', 'descricao' => 'Campeonato Brasileiro', 'data_inicio' => '2025-12-10 16:00:00', 'data_fim' => '2025-12-10 18:00:00', 'tipo' => 'JOGO', 'local' => 'Maracana'],
+        ['titulo' => 'Treino Tatico', 'descricao' => 'Preparacao para o jogo', 'data_inicio' => '2025-12-09 09:00:00', 'data_fim' => '2025-12-09 11:00:00', 'tipo' => 'TREINO', 'local' => 'CT do Clube'],
+        ['titulo' => 'Exames Medicos', 'descricao' => 'Check-up mensal do elenco', 'data_inicio' => '2025-12-08 08:00:00', 'data_fim' => '2025-12-08 12:00:00', 'tipo' => 'EXAME', 'local' => 'Centro Medico'],
     ];
     
     foreach ($eventos as $e) {
-        $stmt = $pdo->prepare("INSERT IGNORE INTO eventos (titulo, descricao, data_inicio, data_fim, tipo, local, cor, usuario_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
-        $stmt->execute([$e['titulo'], $e['descricao'], $e['data_inicio'], $e['data_fim'], $e['tipo'], $e['local'], $e['cor'], $tecnicoId]);
+        $stmt = $pdo->prepare("INSERT IGNORE INTO eventos (titulo, descricao, data_inicio, data_fim, tipo, local, usuario_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
+        $stmt->execute([$e['titulo'], $e['descricao'], $e['data_inicio'], $e['data_fim'], $e['tipo'], $e['local'], $tecnicoId]);
     }
     $results['steps'][] = 'Eventos criados';
     
