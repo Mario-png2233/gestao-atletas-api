@@ -2,12 +2,18 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-// Carregar variáveis de ambiente
-$host = getenv('DB_HOST') ?: 'localhost';
-$port = getenv('DB_PORT') ?: '3306';
-$database = getenv('DB_DATABASE') ?: 'gestao_atletas';
-$username = getenv('DB_USERNAME') ?: 'root';
-$password = getenv('DB_PASSWORD') ?: '';
+// Função para pegar variáveis de ambiente (compatível com Railway)
+function getEnvVar($key, $default = null) {
+    $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key) ?? null;
+    return $value !== null && $value !== false ? $value : $default;
+}
+
+// Carregar variáveis de ambiente (Railway usa MYSQL* como padrão)
+$host = getEnvVar('DB_HOST', getEnvVar('MYSQLHOST', 'localhost'));
+$port = getEnvVar('DB_PORT', getEnvVar('MYSQLPORT', '3306'));
+$database = getEnvVar('DB_DATABASE', getEnvVar('MYSQLDATABASE', 'gestao_atletas'));
+$username = getEnvVar('DB_USERNAME', getEnvVar('MYSQLUSER', 'root'));
+$password = getEnvVar('DB_PASSWORD', getEnvVar('MYSQLPASSWORD', ''));
 
 $result = [
     'config' => [
