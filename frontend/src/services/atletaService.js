@@ -12,3 +12,4 @@ export const atletaService = {
   excluir: (id) => api.delete(`/atletas/${id}`),
 };
 
+

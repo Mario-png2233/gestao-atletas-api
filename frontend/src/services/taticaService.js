@@ -12,3 +12,4 @@ export const taticaService = {
   excluir: (id) => api.delete(`/taticas/${id}`),
 };
 
+

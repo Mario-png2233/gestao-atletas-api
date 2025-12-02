@@ -14,3 +14,4 @@ export const lesaoService = {
   excluir: (atletaId, lesaoId) => api.delete(`/atletas/${atletaId}/lesoes/${lesaoId}`),
 };
 
+

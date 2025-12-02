@@ -14,3 +14,4 @@ export const eventoService = {
   excluir: (id) => api.delete(`/eventos/${id}`),
 };
 
+

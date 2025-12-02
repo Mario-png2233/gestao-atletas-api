@@ -347,3 +347,4 @@ const CampoTatico = ({ formacao = '4-4-2', posicoes: posicoesIniciais, onSave, r
 
 export default CampoTatico;
 
+

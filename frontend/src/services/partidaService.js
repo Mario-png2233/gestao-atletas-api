@@ -12,3 +12,4 @@ export const partidaService = {
   excluir: (id) => api.delete(`/partidas/${id}`),
 };
 
+

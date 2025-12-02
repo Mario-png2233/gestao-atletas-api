@@ -49,3 +49,4 @@ class CreateAvaliacoesFisicasTable extends Migration
     }
 }
 
+

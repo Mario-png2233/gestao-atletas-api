@@ -27,3 +27,4 @@ class Despesa extends Model
     ];
 }
 
+

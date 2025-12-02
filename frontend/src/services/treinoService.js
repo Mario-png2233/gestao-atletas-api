@@ -16,3 +16,4 @@ export const treinoService = {
   registrarPresenca: (id, presencas) => api.put(`/treinos/${id}/presenca`, { presencas }),
 };
 
+

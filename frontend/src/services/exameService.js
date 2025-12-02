@@ -14,3 +14,4 @@ export const exameService = {
   excluir: (atletaId, exameId) => api.delete(`/atletas/${atletaId}/exames/${exameId}`),
 };
 
+

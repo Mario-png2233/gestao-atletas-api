@@ -8,3 +8,4 @@ export const notificacaoService = {
   contarNaoLidas: () => api.get('/notificacoes/nao-lidas/count'),
 };
 
+

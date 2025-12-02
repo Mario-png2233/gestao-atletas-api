@@ -29,3 +29,4 @@ class Receita extends Model
     }
 }
 
+
