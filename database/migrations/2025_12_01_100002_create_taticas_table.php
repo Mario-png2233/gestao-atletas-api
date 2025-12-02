@@ -10,7 +10,8 @@ class CreateTaticasTable extends Migration
     {
         Schema::create('taticas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('usuario_id')->constrained('usuarios'); // Técnico que criou
+            $table->unsignedInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->string('nome');
             $table->string('formacao'); // Ex: 4-4-2, 4-3-3, 3-5-2
             $table->text('descricao');
