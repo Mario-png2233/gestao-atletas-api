@@ -64,3 +64,4 @@ class AvaliacaoFisica extends Model
 }
 
 
+

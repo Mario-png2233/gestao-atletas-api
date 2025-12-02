@@ -194,3 +194,4 @@ const PartidasList = () => {
 export default PartidasList;
 
 
+

@@ -36,3 +36,4 @@ class AddDataRecuperacaoEstimadaToLesoes extends Migration
 }
 
 
+
