@@ -26,6 +26,8 @@ class AtletaController extends Controller
 
     public function store(Request $request)
     {
+        $this->parseJsonInput($request);
+
         $this->validate($request, [
             'nome' => 'required',
             'data_nascimento' => 'required|date',
@@ -47,6 +49,8 @@ class AtletaController extends Controller
         if (!$atleta) {
             return response()->json(['error' => 'Atleta não encontrado'], 404);
         }
+
+        $this->parseJsonInput($request);
 
         $this->validate($request, [
             'nome' => 'string',

@@ -10,7 +10,6 @@ class RelatorioController extends Controller
 {
     public function disponibilidade(Request $request)
     {
-        // Validação básica
         if (!$request->has('data_inicio') || !$request->has('data_fim')) {
             return response()->json(['error' => 'Datas de início e fim são obrigatórias'], 422);
         }
@@ -18,7 +17,6 @@ class RelatorioController extends Controller
         $dataInicio = $request->data_inicio;
         $dataFim = $request->data_fim;
 
-        // RN-030: Período não pode ser superior a 1 ano
         $diasPeriodo = (strtotime($dataFim) - strtotime($dataInicio)) / (60 * 60 * 24);
         if ($diasPeriodo > 365) {
             return response()->json(['error' => 'O período de análise não pode ser superior a 1 ano'], 422);
@@ -59,7 +57,7 @@ class RelatorioController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Erro ao gerar relatório'], 500);
+            return response()->json(['error' => 'Erro ao gerar relatório: ' . $e->getMessage()], 500);
         }
     }
 }

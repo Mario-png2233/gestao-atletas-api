@@ -1,14 +1,40 @@
-/vendor/ 
-.env 
-.storage/ 
-/bootstrap/cache/ 
-storage/logs/ 
-*.log 
-.DS_Store 
-Thumbs.db 
-.idea/ 
-.vscode/ 
-desktop.ini 
-*.backup 
-*.tmp 
-.phpunit.result.cache 
+# ==================== BACKEND ====================
+/vendor/
+.env
+.storage/
+/bootstrap/cache/
+storage/logs/
+*.log
+.phpunit.result.cache
+
+# ==================== FRONTEND ====================
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env.local
+/frontend/.env.*.local
+
+# ==================== SCRIPTS DE SEED (temporários) ====================
+seed_demo.php
+seed_demo2.php
+seed_final.php
+seed_complete.php
+
+# ==================== SISTEMA OPERACIONAL ====================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.backup
+*.tmp
+
+# ==================== IDEs ====================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ==================== OUTROS ====================
+*.cache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

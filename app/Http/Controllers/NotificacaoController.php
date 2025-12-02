@@ -9,7 +9,7 @@ class NotificacaoController extends Controller
 {
     public function index(Request $request)
     {
-        $usuarioId = 1; // ID fixo para testes
+        $usuarioId = 1;
         
         $notificacoes = Notificacao::where('usuario_id', $usuarioId)
                                   ->orderBy('created_at', 'desc')
