@@ -46,7 +46,7 @@ const Login = () => {
       <div className="card login-card shadow">
         <div className="card-body p-5">
           <div className="text-center mb-4">
-            <h2 className="fw-bold">⚽ Gestão de Atletas</h2>
+            <h2 className="fw-bold">Sistema de Gerenciamento de Atletas</h2>
             <p className="text-muted">{isRegister ? 'Criar nova conta' : 'Faça login para continuar'}</p>
           </div>
 
