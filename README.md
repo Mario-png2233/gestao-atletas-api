@@ -132,7 +132,15 @@ cd ..
 
 ### 5️⃣ Iniciar os Servidores
 
-Abra **2 terminais**:
+**Opção A — um único terminal (recomendado):**
+
+```bash
+# Na raiz do projeto (primeira vez: npm install)
+npm install
+npm run dev
+```
+
+**Opção B — dois terminais:**
 
 **Terminal 1 - Backend (API):**
 ```bash

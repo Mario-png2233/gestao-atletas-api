@@ -40,3 +40,6 @@ class CreateReceitasTable extends Migration
 
 
 
+
+
+

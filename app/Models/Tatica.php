@@ -37,3 +37,6 @@ class Tatica extends Model
 
 
 
+
+
+

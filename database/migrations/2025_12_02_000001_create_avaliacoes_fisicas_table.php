@@ -55,3 +55,6 @@ class CreateAvaliacoesFisicasTable extends Migration
 
 
 
+
+
+
