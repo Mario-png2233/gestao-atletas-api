@@ -6,6 +6,7 @@
 storage/logs/
 *.log
 .phpunit.result.cache
+/database/*_backup.sql
 
 # ==================== FRONTEND ====================
 /node_modules/

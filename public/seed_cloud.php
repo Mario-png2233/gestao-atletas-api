@@ -2,10 +2,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-function getEnvVar($key, $default = null) {
-    $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key) ?? null;
-    return $value !== null && $value !== false ? $value : $default;
-}
+require_once __DIR__ . '/../bootstrap/env_helpers.php';
 
 $host = getEnvVar('DB_HOST', 'localhost');
 $port = getEnvVar('DB_PORT', '3306');

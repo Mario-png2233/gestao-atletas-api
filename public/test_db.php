@@ -2,11 +2,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-// Função para pegar variáveis de ambiente (compatível com Railway)
-function getEnvVar($key, $default = null) {
-    $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key) ?? null;
-    return $value !== null && $value !== false ? $value : $default;
-}
+require_once __DIR__ . '/../bootstrap/env_helpers.php';
 
 // Carregar variáveis de ambiente (Railway usa MYSQL* como padrão)
 $host = getEnvVar('DB_HOST', getEnvVar('MYSQLHOST', 'localhost'));

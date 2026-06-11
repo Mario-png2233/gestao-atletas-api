@@ -1,11 +1,6 @@
 <?php
 
-// Função helper para pegar variáveis de ambiente (compatível com Railway)
-function getEnvVar($key, $default = null) {
-    // Tenta várias formas de pegar a variável
-    $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key) ?? null;
-    return $value !== null && $value !== false ? $value : $default;
-}
+require_once __DIR__ . '/../bootstrap/env_helpers.php';
 
 return [
     'default' => getEnvVar('DB_CONNECTION', 'mysql'),

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class DemoSeeder extends Seeder
 {
@@ -19,32 +20,32 @@ class DemoSeeder extends Seeder
                 'senha' => Hash::make('123456'),
                 'perfil' => 'TECNICO',
                 'tentativas_login' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'email' => 'medico@clubefc.com',
                 'senha' => Hash::make('123456'),
                 'perfil' => 'MEDICO',
                 'tentativas_login' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'email' => 'preparador@clubefc.com',
                 'senha' => Hash::make('123456'),
                 'perfil' => 'PREPARADOR',
                 'tentativas_login' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'email' => 'financeiro@clubefc.com',
                 'senha' => Hash::make('123456'),
                 'perfil' => 'DIRETOR_FINANCEIRO',
                 'tentativas_login' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ];
 
@@ -227,8 +228,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($atletas as $atleta) {
-            $atleta['created_at'] = now();
-            $atleta['updated_at'] = now();
+            $atleta['created_at'] = Carbon::now();
+            $atleta['updated_at'] = Carbon::now();
             DB::table('atletas')->updateOrInsert(
                 ['nome' => $atleta['nome']],
                 $atleta
@@ -238,52 +239,55 @@ class DemoSeeder extends Seeder
         // Pegar IDs dos atletas
         $atletasIds = DB::table('atletas')->pluck('id', 'nome')->toArray();
 
+        $usuarioMedico = DB::table('usuarios')->where('perfil', 'MEDICO')->first();
+
         // ==================== LESÕES ====================
         echo "Criando lesões...\n";
         
         $lesoes = [
             [
                 'atleta_id' => $atletasIds['Gabriel Nascimento'],
+                'usuario_id' => $usuarioMedico->id,
                 'tipo_lesao' => 'Lesão muscular grau 2 - Coxa direita',
                 'data_lesao' => '2025-11-20',
                 'gravidade' => 'MODERADA',
                 'descricao' => 'Lesão durante treino. Atleta sentiu fisgada na coxa direita durante sprint.',
-                'tratamento' => 'Fisioterapia diária, repouso de 3 semanas, anti-inflamatórios.',
+                'tratamento_prescrito' => 'Fisioterapia diária, repouso de 3 semanas, anti-inflamatórios.',
                 'previsao_retorno' => '2025-12-15',
                 'status' => 'ATIVA'
             ],
             [
                 'atleta_id' => $atletasIds['Henrique Dias'],
+                'usuario_id' => $usuarioMedico->id,
                 'tipo_lesao' => 'Lesão ligamentar - Joelho esquerdo',
                 'data_lesao' => '2025-10-05',
                 'gravidade' => 'GRAVE',
                 'descricao' => 'Entorse do joelho durante partida. Lesão parcial do LCA.',
-                'tratamento' => 'Cirurgia realizada em 10/10. Fisioterapia intensiva.',
+                'tratamento_prescrito' => 'Cirurgia realizada em 10/10. Fisioterapia intensiva.',
                 'previsao_retorno' => '2026-02-01',
                 'status' => 'ATIVA'
             ],
             [
                 'atleta_id' => $atletasIds['Thiago Santos Pereira'],
+                'usuario_id' => $usuarioMedico->id,
                 'tipo_lesao' => 'Contusão - Tornozelo direito',
                 'data_lesao' => '2025-11-01',
                 'gravidade' => 'LEVE',
                 'descricao' => 'Pancada durante treino tático.',
-                'tratamento' => 'Gelo, repouso de 5 dias.',
+                'tratamento_prescrito' => 'Gelo, repouso de 5 dias.',
                 'previsao_retorno' => '2025-11-06',
-                'status' => 'RECUPERADA'
+                'status' => 'CURADA'
             ]
         ];
 
         foreach ($lesoes as $lesao) {
-            $lesao['created_at'] = now();
-            $lesao['updated_at'] = now();
+            $lesao['created_at'] = Carbon::now();
+            $lesao['updated_at'] = Carbon::now();
             DB::table('lesoes')->insert($lesao);
         }
 
         // ==================== EXAMES MÉDICOS ====================
         echo "Criando exames médicos...\n";
-        
-        $usuarioMedico = DB::table('usuarios')->where('perfil', 'MEDICO')->first();
         
         foreach ($atletasIds as $nome => $atletaId) {
             DB::table('exames_medicos')->insert([
@@ -295,8 +299,8 @@ class DemoSeeder extends Seeder
                 'status' => 'APROVADO',
                 'recomendacoes' => 'Apto para atividades físicas de alta intensidade.',
                 'proximo_exame' => '2026-01-15',
-                'created_at' => now(),
-                'updated_at' => now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]);
         }
 
@@ -343,8 +347,8 @@ class DemoSeeder extends Seeder
                     'status' => 'APTO',
                     'observacoes' => 'Atleta em boas condições físicas.',
                     'recomendacoes' => 'Manter programa de treinamento atual.',
-                    'created_at' => now(),
-                    'updated_at' => now()
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
                 ]);
             }
         }
@@ -415,8 +419,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($taticas as $tatica) {
-            $tatica['created_at'] = now();
-            $tatica['updated_at'] = now();
+            $tatica['created_at'] = Carbon::now();
+            $tatica['updated_at'] = Carbon::now();
             DB::table('taticas')->insert($tatica);
         }
 
@@ -479,8 +483,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($patrocinios as $patrocinio) {
-            $patrocinio['created_at'] = now();
-            $patrocinio['updated_at'] = now();
+            $patrocinio['created_at'] = Carbon::now();
+            $patrocinio['updated_at'] = Carbon::now();
             DB::table('patrocinios')->insert($patrocinio);
         }
 
@@ -501,8 +505,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($receitas as $receita) {
-            $receita['created_at'] = now();
-            $receita['updated_at'] = now();
+            $receita['created_at'] = Carbon::now();
+            $receita['updated_at'] = Carbon::now();
             DB::table('receitas')->insert($receita);
         }
 
@@ -523,8 +527,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($despesas as $despesa) {
-            $despesa['created_at'] = now();
-            $despesa['updated_at'] = now();
+            $despesa['created_at'] = Carbon::now();
+            $despesa['updated_at'] = Carbon::now();
             DB::table('despesas')->insert($despesa);
         }
 
@@ -575,8 +579,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($treinos as $treino) {
-            $treino['created_at'] = now();
-            $treino['updated_at'] = now();
+            $treino['created_at'] = Carbon::now();
+            $treino['updated_at'] = Carbon::now();
             DB::table('treinos')->insert($treino);
         }
 
@@ -635,8 +639,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($partidas as $partida) {
-            $partida['created_at'] = now();
-            $partida['updated_at'] = now();
+            $partida['created_at'] = Carbon::now();
+            $partida['updated_at'] = Carbon::now();
             DB::table('partidas')->insert($partida);
         }
 
@@ -719,8 +723,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($eventos as $evento) {
-            $evento['created_at'] = now();
-            $evento['updated_at'] = now();
+            $evento['created_at'] = Carbon::now();
+            $evento['updated_at'] = Carbon::now();
             DB::table('eventos')->insert($evento);
         }
 
@@ -759,8 +763,8 @@ class DemoSeeder extends Seeder
         ];
 
         foreach ($notificacoes as $notificacao) {
-            $notificacao['created_at'] = now();
-            $notificacao['updated_at'] = now();
+            $notificacao['created_at'] = Carbon::now();
+            $notificacao['updated_at'] = Carbon::now();
             DB::table('notificacoes')->insert($notificacao);
         }
 
